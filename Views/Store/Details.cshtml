@@ -1,0 +1,150 @@
+﻿@model NguyenNgocThien_Buoi4.Models.Product
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container py-5">
+    @if (TempData["Success"] != null)
+    {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Success"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    }
+
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Store" asp-action="Index">Cửa hàng</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Store" asp-action="Index" asp-route-categoryId="@Model.CategoryId">@Model.Category.Name</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card border-0">
+                <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/images/default-product.jpg" : Model.ImageUrl)" 
+                     class="card-img-top rounded" alt="@Model.Name" style="max-height: 400px; object-fit: contain;">
+            </div>
+        </div>
+        <div class="col-md-7">
+            <h2 class="mb-3">@Model.Name</h2>
+            <div class="d-flex align-items-center mb-3">
+                <span class="badge bg-secondary me-2">@Model.Category.Name</span>
+                <span class="text-muted">Mã sản phẩm: #@Model.Id</span>
+            </div>
+            <h3 class="text-purple mb-4">@Model.Price.ToString("N0") đ</h3>
+            <p class="mb-4">@Model.Description</p>
+
+            <div class="d-flex align-items-center mb-4">
+                <span class="me-3">Tình trạng:</span>
+                @if (Model.Stock > 0)
+                {
+                        <span class="badge bg-success">Còn hàng (@Model.Stock)</span>
+                }
+                else
+                {
+                        <span class="badge bg-danger">Hết hàng</span>
+                }
+            </div>
+
+            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-flex align-items-center mb-4">
+                <input type="hidden" name="productId" value="@Model.Id" />
+                <div class="input-group me-3" style="width: 130px;">
+                    <button type="button" class="btn btn-outline-secondary" onclick="decrementQuantity()">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <input type="number" id="quantity" name="quantity" class="form-control text-center" value="1" min="1" max="@Model.Stock">
+                    <button type="button" class="btn btn-outline-secondary" onclick="incrementQuantity()">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <button type="submit" class="btn btn-purple" @(Model.Stock <= 0 ? "disabled" : "")>
+                    <i class="fas fa-cart-plus me-2"></i> Thêm vào giỏ hàng
+                </button>
+            </form>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title">Thông tin sản phẩm</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Bảo hành 12 tháng</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Giao hàng toàn quốc</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Đổi trả trong 7 ngày</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i> Thanh toán khi nhận hàng</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Products -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3 class="mb-4">Sản phẩm liên quan</h3>
+        </div>
+        @foreach (var product in ViewBag.RelatedProducts)
+        {
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 product-card">
+                        <img src="@(string.IsNullOrEmpty(product.ImageUrl) ? "/images/default-product.jpg" : product.ImageUrl)" 
+                             class="card-img-top" alt="@product.Name" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text font-weight-bold text-purple">@product.Price.ToString("N0") đ</p>
+                            <div class="d-flex justify-content-between">
+                                <a asp-action="Details" asp-route-id="@product.Id" class="btn btn-outline-purple btn-sm">
+                                    <i class="fas fa-eye me-1"></i> Xem chi tiết
+                                </a>
+                                <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                                    <input type="hidden" name="productId" value="@product.Id" />
+                                    <button type="submit" class="btn btn-purple btn-sm">
+                                        <i class="fas fa-cart-plus me-1"></i> Thêm
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+        <script>
+            function incrementQuantity() {
+                var input = document.getElementById('quantity');
+                var max = parseInt(input.getAttribute('max'));
+                var value = parseInt(input.value);
+                if (value &lt; max) {
+                    input.value = value + 1;
+                }
+            }
+
+            function decrementQuantity() {
+                var input = document.getElementById('quantity');
+                var value = parseInt(input.value);
+                if (value > 1) {
+                    input.value = value - 1;
+                }
+            }
+
+            // Hiệu ứng hover cho sản phẩm
+            $(document).ready(function() {
+                $('.product-card').hover(
+                    function() {
+                        $(this).addClass('shadow');
+                        $(this).css('transform', 'translateY(-5px  {
+                        $(this).addClass('shadow');
+                        $(this).css('transform', 'translateY(-5px)');
+                        $(this).css('transition', 'all 0.3s ease');
+                    },
+                    function() {
+                        $(this).removeClass('shadow');
+                        $(this).css('transform', 'translateY(0)');
+                    }
+                );
+            });
+        </script>
+}

@@ -1,0 +1,254 @@
+@* <!DOCTYPE html> *@
+@* <html lang="en"> *@
+@* <head> *@
+@*     <meta charset="utf-8" /> *@
+@*     <meta name="viewport" content="width=device-width, initial-scale=1.0" /> *@
+@*     <title>@ViewData["Title"] - NguyenNgocThien_Buoi4</title> *@
+@*     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+@*     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" /> *@
+@*     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
+@*     <link rel="stylesheet" href="~/NguyenNgocThien_Buoi4.styles.css" asp-append-version="true" /> *@
+@* </head> *@
+@* <body> *@
+@*     <header class="header-gradient"> *@
+@*         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow mb-3"> *@
+@*             <div class="container"> *@
+@*                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DYLAN SHOP</a> *@
+@*                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" *@
+@*                         aria-expanded="false" aria-label="Toggle navigation"> *@
+@*                     <span class="navbar-toggler-icon"></span> *@
+@*                 </button> *@
+@*                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between"> *@
+@*                     <ul class="navbar-nav flex-grow-1"> *@
+@*                         <li class="nav-item"> *@
+@*                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Trang ch?</a> *@
+@*                         </li> *@
+@*                         <li class="nav-item"> *@
+@*                             <a class="nav-link" asp-area="" asp-controller="Store" asp-action="Index">C?a h�ng</a> *@
+@*                         </li> *@
+@*                         @if (User.Identity.IsAuthenticated) *@
+@*                         { *@
+@*                             @if (User.IsInRole("Admin")) *@
+@*                             { *@
+@*                                         <li class="nav-item"> *@
+@*                                             <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Qu?n tr?</a> *@
+@*                                         </li> *@
+@*                             } *@
+@*                                 <li class="nav-item"> *@
+@*                                     <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="MyOrders">�on h�ng c?a t�i</a> *@
+@*                                 </li> *@
+@*                         } *@
+@*                     </ul> *@
+@*                     <ul class="navbar-nav"> *@
+@*                         @if (User.Identity.IsAuthenticated) *@
+@*                         { *@
+@*                                 <li class="nav-item dropdown"> *@
+@*                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> *@
+@*                                         <i class="fas fa-user-circle me-1"></i> @User.Identity.Name *@
+@*                                     </a> *@
+@*                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"> *@
+@*                                         <li><a class="dropdown-item" asp-area="" asp-controller="Manage" asp-action="Index">H? so</a></li> *@
+@*                                         <li><hr class="dropdown-divider"></li> *@
+@*                                         <li> *@
+@*                                             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"> *@
+@*                                                 <button type="submit" class="dropdown-item">�ang xu?t</button> *@
+@*                                             </form> *@
+@*                                         </li> *@
+@*                                     </ul> *@
+@*                                 </li> *@
+@*                         } *@
+@*                         else *@
+@*                         { *@
+@*                                 <li class="nav-item"> *@
+@*                                     <a class="nav-link btn-auth login" asp-area="Identity" asp-page="/Account/Login">�ang nh?p</a> *@
+@*                                 </li> *@
+@*                                 <li class="nav-item"> *@
+@*                                     <a class="nav-link btn-auth register" asp-area="Identity" asp-page="/Account/Register">�ang k�</a> *@
+@*                                 </li> *@
+@*                         } *@
+@*                     </ul> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </nav> *@
+@*     </header> *@
+@*     <div class="container"> *@
+@*         <main role="main" class="pb-3"> *@
+@*             @RenderBody() *@
+@*         </main> *@
+@*     </div> *@
+
+@*     <footer class="footer-gradient text-white py-3 mt-4"> *@
+@*         <div class="container"> *@
+@*             <div class="row"> *@
+@*                 <div class="col-md-4"> *@
+@*                     <h5>Dylan Shop</h5> *@
+@*                     <p>C?a h�ng s?n ph?m d?i s?ng ch?t lu?ng cao</p> *@
+@*                 </div> *@
+@*                 <div class="col-md-4"> *@
+@*                     <h5>Li�n h?</h5> *@
+@*                     <ul class="list-unstyled"> *@
+@*                         <li><i class="fas fa-map-marker-alt me-2"></i> 123 Nguy?n Hu?, Qu?n 1, TP.HCM</li> *@
+@*                         <li><i class="fas fa-phone me-2"></i> 0123 456 789</li> *@
+@*                         <li><i class="fas fa-envelope me-2"></i> DylanNquyen@gmail.com</li> *@
+@*                     </ul> *@
+@*                 </div> *@
+@*                 <div class="col-md-4"> *@
+@*                     <h5>Theo d�i ch�ng t�i</h5> *@
+@*                     <div class="social-icons"> *@
+@*                         <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a> *@
+@*                         <a href="#" class="me-2"><i class="fab fa-twitter"></i></a> *@
+@*                         <a href="#" class="me-2"><i class="fab fa-instagram"></i></a> *@
+@*                         <a href="#"><i class="fab fa-youtube"></i></a> *@
+@*                     </div> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <hr class="footer-divider"> *@
+@*             <div class="text-center"> *@
+@*                 &copy; 2025 - DylanShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> *@
+@*             </div> *@
+@*         </div> *@
+@*     </footer> *@
+
+@*     <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+@*     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
+@*     <script src="~/js/site.js" asp-append-version="true"></script> *@
+@*     @await RenderSectionAsync("Scripts", required: false) *@
+@* </body> *@
+@* </html> *@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Dylan Shop</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="header-gradient">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-store me-2"></i>DYLAN SHOP
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i> Trang ch?
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Store" asp-action="Index">
+                                <i class="fas fa-shopping-bag me-1"></i> C?a h�ng
+                            </a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                                                <i class="fas fa-cogs me-1"></i> Quản trị
+                                            </a>
+                                        </li>
+                            }
+                                
+                        }
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index">
+                                <i class="fas fa-shopping-cart me-1"></i> Giỏ hàng
+                            </a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-user-circle me-1"></i> @User.Identity.Name
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Manage" asp-action="Index">
+                                            <i class="fas fa-user-cog me-1"></i> H? so
+                                        </a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                                <button type="submit" class="dropdown-item">
+                                                    <i class="fas fa-sign-out-alt me-1"></i> Đăng xuất
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                        }
+                        else
+                        {
+                                <li class="nav-item">
+                                    <a class="nav-link btn-auth login" asp-area="Identity" asp-page="/Account/Login">
+                                        <i class="fas fa-sign-in-alt me-1"></i> Đăng nhập
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn-auth register" asp-area="Identity" asp-page="/Account/Register">
+                                        <i class="fas fa-user-plus me-1"></i> Đăng ký
+                                    </a>
+                                </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer-gradient text-white py-3 mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-store me-2"></i>Dylan Shop</h5>
+                    <p>C?a h�ng s?n ph?m d?i s?ng ch?t lu?ng cao</p>
+                </div>
+                <div class="col-md-4">
+                    <h5><i class="fas fa-address-book me-2"></i>Li�n h?</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Th? �?c, TP.HCM</li>
+                        <li><i class="fas fa-phone me-2"></i> 0969887591</li>
+                        <li><i class="fas fa-envelope me-2"></i> DylanNquyen@gmail.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5><i class="fas fa-hashtag me-2"></i>Theo d�i ch�ng t�i</h5>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=100041301602063https://www.facebook.com/profile.php?id=100041301602063" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/MilanoMulan" class="me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/nnt._.04/" class="me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/DylanNquyen" class="me-2"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="text-center">
+                &copy; 2025 - DylanShop - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

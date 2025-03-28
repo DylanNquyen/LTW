@@ -1,0 +1,72 @@
+﻿@model NguyenNgocThien_Buoi4.Models.Product
+@{
+    ViewData["Title"] = "Xóa sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container py-4">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Dashboard</a></li>
+            <li class="breadcrumb-item"><a asp-action="Index">Sản phẩm</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Xóa</li>
+        </ol>
+    </nav>
+
+    <div class="card border-danger">
+        <div class="card-header bg-danger text-white">
+            <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Xác nhận xóa sản phẩm</h5>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-circle me-2"></i>Bạn có chắc chắn muốn xóa sản phẩm này? Hành động này không thể hoàn tác.
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 text-center mb-4 mb-md-0">
+                    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded shadow-sm" style="max-height: 250px;">
+                </div>
+                <div class="col-md-8">
+                    <h3 class="mb-3">@Model.Name</h3>
+                    <div class="mb-3">
+                        <span class="badge bg-primary">@Model.Category?.Name</span>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary">Giá bán</h5>
+                                    <p class="card-text fs-4 fw-bold">@Model.Price.ToString("N0") đ</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary">Tồn kho</h5>
+                                    <p class="card-text fs-4 fw-bold">@Model.Stock</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h5 class="text-primary">Mô tả sản phẩm</h5>
+                        <p>@Model.Description</p>
+                    </div>
+
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash me-2"></i>Xác nhận xóa
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Quay lại
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

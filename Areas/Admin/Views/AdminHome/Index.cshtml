@@ -1,0 +1,558 @@
+﻿@model IEnumerable<NguyenNgocThien_Buoi4.Models.Order>
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container py-5">
+    <div class="jumbotron text-white rounded-3 p-5 mb-2">
+        <h1 class="display-2">Chào mừng Dylan Nquyen!</h1>
+        <p class="lead">Hệ thống báo cáo dữ liệu của Dylan Shop ></p>
+        <hr class="my-4 border-white">
+        <div class="row mb-2">
+            <div class="col-md-12">
+             <a href="http://localhost:5259/" class="btn btn-primary">
+                <i class="fas fa-home me-2"></i> Trang Chủ
+             </a>
+        </div>
+    </div>
+    </div>
+
+    @* <!-- Admin Management Functions --> *@
+    @* <div class="row mb-2"> *@
+    @*     <div class="col-md-12"> *@
+    @*         <div class="card border-primary"> *@
+    @*             <div class="card-header bg-primary text-white"> *@
+    @*                 <h5 class="mb-0">Quản lý dữ liệu</h5> *@
+    @*             </div> *@
+    @*             <div class="card-body"> *@
+    @*                 <!-- Products Management --> *@
+    @*                 <div class="mb-2"> *@
+    @*                     <h5 class="border-bottom pb-2 mb-3 text-purple"> *@
+    @*                         <i class="fas fa-box-open me-2"></i> Sản phẩm *@
+    @*                     </h5> *@
+    @*                     <div class="row"> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <a asp-area="Admin" asp-controller="Products" asp-action="Index" class="btn btn-outline-primary w-100"> *@
+    @*                                 <i class="fas fa-list me-2"></i> Danh sách sản phẩm *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <a asp-area="Admin" asp-controller="Products" asp-action="Create" class="btn btn-outline-success w-100"> *@
+    @*                                 <i class="fas fa-plus me-2"></i> Thêm sản phẩm *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <!-- Đã loại bỏ asp-route-id="1" vì không cần thiết cho trang danh sách --> *@
+    @*                             <a asp-area="Admin" asp-controller="Products" asp-action="Edit" class="btn btn-outline-warning w-100"> *@
+    @*                                 <i class="fas fa-edit me-2"></i> Sửa sản phẩm *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <!-- Đã loại bỏ asp-route-id="1" vì không cần thiết cho trang danh sách --> *@
+    @*                             <a asp-area="Admin" asp-controller="Products" asp-action="Delete" class="btn btn-outline-danger w-100"> *@
+    @*                                 <i class="fas fa-trash me-2"></i> Xóa sản phẩm *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+
+    @*                 <!-- Categories Management --> *@
+    @*                 <div class="mb-2"> *@
+    @*                     <h5 class="border-bottom pb-2 mb-3 text-purple"> *@
+    @*                         <i class="fas fa-tags me-2"></i> Danh mục *@
+    @*                     </h5> *@
+    @*                     <div class="row"> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <a asp-area="Admin" asp-controller="Categories" asp-action="Index" class="btn btn-outline-primary w-100"> *@
+    @*                                 <i class="fas fa-list me-2"></i> Danh sách danh mục *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <a asp-area="Admin" asp-controller="Categories" asp-action="Create" class="btn btn-outline-success w-100"> *@
+    @*                                 <i class="fas fa-plus me-2"></i> Thêm danh mục *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <!-- Đã loại bỏ asp-route-id="1" vì không cần thiết cho trang danh sách --> *@
+    @*                             <a asp-area="Admin" asp-controller="Categories" asp-action="Edit" class="btn btn-outline-warning w-100"> *@
+    @*                                 <i class="fas fa-edit me-2"></i> Sửa danh mục *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <!-- Đã loại bỏ asp-route-id="1" vì không cần thiết cho trang danh sách --> *@
+    @*                             <a asp-area="Admin" asp-controller="Categories" asp-action="Delete" class="btn btn-outline-danger w-100"> *@
+    @*                                 <i class="fas fa-trash me-2"></i> Xóa danh mục *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+
+    @*                 <!-- Users Management --> *@
+    @*                 <div> *@
+    @*                     <h5 class="border-bottom pb-2 mb-3 text-purple"> *@
+    @*                         <i class="fas fa-users me-2"></i> Người dùng *@
+    @*                     </h5> *@
+    @*                     <div class="row"> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="btn btn-outline-primary w-100"> *@
+    @*                                 <i class="fas fa-list me-2"></i> Danh sách người dùng *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <a asp-area="Admin" asp-controller="Users" asp-action="Create" class="btn btn-outline-success w-100"> *@
+    @*                                 <i class="fas fa-user-plus me-2"></i> Thêm người dùng *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <!-- Đã loại bỏ asp-route-id="1" vì không cần thiết cho trang danh sách --> *@
+    @*                             <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="btn btn-outline-warning w-100"> *@
+    @*                                 <i class="fas fa-user-edit me-2"></i> Sửa người dùng *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <!-- Đã loại bỏ asp-route-id="1" vì không cần thiết cho trang danh sách --> *@
+    @*                             <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="btn btn-outline-danger w-100"> *@
+    @*                                 <i class="fas fa-user-times me-2"></i> Xóa người dùng *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+
+    @*                 <!-- Orders Management --> *@
+    @*                 <div class="mb-2"> *@
+    @*                     <h5 class="border-bottom pb-2 mb-3 text-purple"> *@
+    @*                         <i class="fas fa-clipboard-list me-2"></i> Đơn hàng *@
+    @*                     </h5> *@
+    @*                     <div class="row"> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index" class="btn btn-outline-primary w-100"> *@
+    @*                                 <i class="fas fa-list me-2"></i> Tất cả đơn hàng *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index" asp-route-status="Pending" class="btn btn-outline-warning w-100"> *@
+    @*                                 <i class="fas fa-clock me-2"></i> Đơn đang chờ *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index" asp-route-status="Processing" class="btn btn-outline-info w-100"> *@
+    @*                                 <i class="fas fa-spinner me-2"></i> Đơn đang xử lý *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                         <div class="col-md-3 mb-3"> *@
+    @*                             <a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index" asp-route-status="Delivered" class="btn btn-outline-success w-100"> *@
+    @*                                 <i class="fas fa-check-circle me-2"></i> Đơn đã giao *@
+    @*                             </a> *@
+    @*                         </div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+    @*             </div> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* </div> *@
+
+    <!-- Summary Stats Cards -->
+    <div class="row mb-2">
+        <div class="col-md-12">
+            <div class="card border-primary mb-2">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Tổng quan</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Products Card -->
+                        <div class="col-xl-3 col-md-6 mb-2">
+                            <div class="card product-card h-100 border-left-primary">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">
+                                                Tổng sản phẩm</div>
+                                            <div class="h5 mb-0 font-weight-bold text-purple">@ViewBag.TotalProducts</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-box-open fa-2x text-muted"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Revenue Card -->
+                        <div class="col-xl-3 col-md-6 mb-2">
+                            <div class="card product-card h-100 border-left-success">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">
+                                                Tổng doanh thu</div>
+                                            <div class="h5 mb-0 font-weight-bold text-purple">@(ViewBag.TotalRevenue?.ToString("N0") ?? "0") đ</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-muted"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Orders Card -->
+                        <div class="col-xl-3 col-md-6 mb-2">
+                            <div class="card product-card h-100 border-left-info">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">
+                                                Tổng đơn hàng</div>
+                                            <div class="h5 mb-0 font-weight-bold text-purple">@ViewBag.TotalOrders</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-shopping-cart fa-2x text-muted"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Users Card -->
+                        <div class="col-xl-3 col-md-6 mb-2">
+                            <div class="card product-card h-100 border-left-warning">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">
+                                                Tổng người dùng</div>
+                                            <div class="h5 mb-0 font-weight-bold text-purple">@ViewBag.TotalUsers</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-users fa-2x text-muted"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Status Cards -->
+    <div class="row mb-2">
+        <div class="col-md-12">
+            <div class="card border-primary mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Trạng thái đơn hàng</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <div class="card product-card h-100 bg-warning">
+                                <div class="card-body text-dark">
+                                    <h6 class="text-uppercase mb-1">Đang chờ xử lý</h6>
+                                    <div class="h4 mb-0 font-weight-bold">@ViewBag.PendingOrders</div>
+                                    <a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index" asp-route-status="Pending" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <div class="card product-card h-100 bg-info">
+                                <div class="card-body text-white">
+                                    <h6 class="text-uppercase mb-1">Đang xử lý</h6>
+                                    <div class="h4 mb-0 font-weight-bold">@ViewBag.ProcessingOrders</div>
+                                    <a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index" asp-route-status="Processing" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <div class="card product-card h-100 bg-success">
+                                <div class="card-body text-white">
+                                    <h6 class="text-uppercase mb-1">Đã giao hàng</h6>
+                                    <div class="h4 mb-0 font-weight-bold">@ViewBag.DeliveredOrders</div>
+                                    <a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index" asp-route-status="Delivered" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <div class="card product-card h-100 bg-danger">
+                                <div class="card-body text-white">
+                                    <h6 class="text-uppercase mb-1">Đã hủy</h6>
+                                    <div class="h4 mb-0 font-weight-bold">@ViewBag.CancelledOrders</div>
+                                    <a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index" asp-route-status="Cancelled" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="row mb-2">
+        <!-- Monthly Revenue Chart -->
+        <div class="col-lg-8 col-md-12 mb-4">
+            <div class="card border-primary h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Doanh thu theo tháng</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area" style="height: 300px;">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Status Pie Chart -->
+        <div class="col-lg-4 col-md-12 mb-2">
+            <div class="card border-primary h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Phân bố trạng thái</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-pie" style="height: 300px;">
+                        <canvas id="orderStatusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tables Row -->
+    <div class="row">
+        <!-- Top Products Table -->
+        <div class="col-lg-6 col-md-12 mb-2">
+            <div class="card border-primary h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Sản phẩm bán chạy</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th class="text-end">Số lượng đã bán</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.TopProducts != null && ViewBag.TopProducts.Count > 0)
+                                {
+                                    @foreach (var item in ViewBag.TopProducts)
+                                    {
+                                        <tr>
+                                            <td>@(item.Product?.Name ?? "Unknown Product")</td>
+                                            <td class="text-end">@item.TotalQuantity</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="2" class="text-center">Không có dữ liệu</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders Table -->
+        <div class="col-lg-6 col-md-12 mb-2">
+            <div class="card border-primary h-100">
+                <div class="card-header bg-primary d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 text-white">Đơn hàng gần đây</h5>
+                    <a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index" class="btn btn-light btn-sm">
+                        <i class="fas fa-list me-1"></i> Xem tất cả
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Mã đơn</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Trạng thái</th>
+                                    <th class="text-end">Tổng tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
+                                {
+                                    @foreach (var order in Model)
+                                    {
+                                        <tr>
+                                            <td><a asp-area="Admin" asp-controller="AdminOrders" asp-action="Details" asp-route-id="@order.Id">#@order.Id</a></td>
+                                            <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                                            <td>
+                                                @switch (order.Status)
+                                                {
+                                                    case "Pending":
+                                                        <span class="badge bg-warning text-dark">Đang chờ</span>
+                                                        break;
+                                                    case "Processing":
+                                                        <span class="badge bg-info">Đang xử lý</span>
+                                                        break;
+                                                    case "Delivered":
+                                                        <span class="badge bg-success">Đã giao</span>
+                                                        break;
+                                                    case "Cancelled":
+                                                        <span class="badge bg-danger">Đã hủy</span>
+                                                        break;
+                                                    default:
+                                                        <span class="badge bg-secondary">@order.Status</span>
+                                                        break;
+                                                }
+                                            </td>
+                                            <td class="text-end">@order.TotalAmount.ToString("N0") đ</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="4" class="text-center">Không có dữ liệu</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Hiệu ứng hover cho các cards
+            $('.product-card').hover(
+                function () {
+                    $(this).addClass('shadow');
+                    $(this).css('transform', 'translateY(-5px)');
+                    $(this).css('transition', 'all 0.3s ease');
+                },
+                function () {
+                    $(this).removeClass('shadow');
+                    $(this).css('transform', 'translateY(0)');
+                }
+            );
+        });
+
+        // Monthly Revenue Chart
+        const revenueChartData = {
+            labels: [
+                @if (ViewBag.MonthlyRevenue != null)
+                {
+                    @foreach (var item in ViewBag.MonthlyRevenue)
+                    {
+                        <text>'@item.Month/@item.Year',</text>
+                    }
+                }
+            ],
+            datasets: [{
+                label: 'Doanh thu (VND)',
+                data: [
+                    @if (ViewBag.MonthlyRevenue != null)
+                    {
+                        @foreach (var item in ViewBag.MonthlyRevenue)
+                        {
+                            <text>@item.Revenue,</text>
+                        }
+                    }
+                ],
+                backgroundColor: 'rgba(212, 175, 55, 0.05)',
+                borderColor: '#d4af37',
+                pointRadius: 3,
+                pointBackgroundColor: '#d4af37',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#d4af37',
+                borderWidth: 2,
+                tension: 0.3
+            }]
+        };
+
+        const revenueChartConfig = {
+            type: 'line',
+            data: revenueChartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+                                    .format(value).replace('₫', '').trim() + ' đ';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + 
+                                    new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+                                    .format(context.parsed.y).replace('₫', '').trim() + ' đ';
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Order Status Pie Chart
+        const orderStatusChartData = {
+            labels: ['Đang chờ', 'Đang xử lý', 'Đã giao', 'Đã hủy'],
+            datasets: [{
+                data: [@ViewBag.PendingOrders, @ViewBag.ProcessingOrders, @ViewBag.DeliveredOrders, @ViewBag.CancelledOrders],
+                backgroundColor: ['#f6c23e', '#36b9cc', '#1cc88a', '#e74a3b'],
+                hoverBackgroundColor: ['#caae3c', '#2aa9bb', '#17a673', '#cf2e1c'],
+                hoverBorderColor: "rgba(234, 236, 244, 1)",
+            }]
+        };
+
+        const orderStatusChartConfig = {
+            type: 'doughnut',
+            data: orderStatusChartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + ' đơn hàng';
+                            }
+                        }
+                    }
+                },
+                cutout: '70%'
+            }
+        };
+
+        // Initialize Charts
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const revenueChartEl = document.getElementById('revenueChart');
+            const orderStatusChartEl = document.getElementById('orderStatusChart');
+            
+            if (revenueChartEl) {
+                new Chart(revenueChartEl, revenueChartConfig);
+            }
+            
+            if (orderStatusChartEl) {
+                new Chart(orderStatusChartEl, orderStatusChartConfig);
+            }
+        });
+    </script>
+}

@@ -1,0 +1,200 @@
+﻿
+
+@model IEnumerable<NguyenNgocThien_Buoi4.Models.Product>
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<div class="container py-5">
+    <!-- Slideshow -->
+    <div id="featuredCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner rounded-3">
+            <div class="carousel-item active">
+                <img src="/images/products/den-ngu-thong-minh.jpg" class="d-block w-100" alt="Sản phẩm nổi bật 1">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Sản phẩm chất lượng cao</h3>
+                    <p>Khám phá bộ sưu tập sản phẩm mới nhất của chúng tôi</p>
+                    <a href="@Url.Action("Index", "Store")" class="btn btn-light">Mua sắm ngay</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/images/products/may-loc-khong-khi.jpg" class="d-block w-100" alt="Sản phẩm nổi bật 2">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Giảm giá đặc biệt</h3>
+                    <p>Ưu đãi lên đến 50% cho các sản phẩm hot</p>
+                    <a href="@Url.Action("Index", "Store")" class="btn btn-light">Xem ngay</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/images/products/bo-chan-ga-goi.jpg" class="d-block w-100" alt="Sản phẩm nổi bật 3">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Miễn phí vận chuyển</h3>
+                    <p>Cho đơn hàng từ 500.000đ</p>
+                    <a href="@Url.Action("Index", "Store")" class="btn btn-light">Tìm hiểu thêm</a>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron text-white rounded-3 p-5 mb-4">
+                <h1 class="display-4">Chào mừng đến với Dylan Shop!</h1>
+                <p class="lead">Cửa hàng sản phẩm đời sống chất lượng cao</p>
+                <hr class="my-4 border-white">
+                <p>Khám phá các sản phẩm chất lượng cao với giá cả hợp lý tại cửa hàng của chúng tôi.</p>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a class="btn btn-light btn-lg" href="@Url.Action("Index", "Store")" role="button">
+                        <i class="fas fa-shopping-bag me-1"></i> Mua sắm ngay
+                    </a>
+
+                    @if (ViewBag.IsAdmin == true)
+                    {
+                            <a class="btn btn-warning btn-lg" href="@Url.Action("Index", "Home", new { area = "Admin" })" role="button">
+                                <i class="fas fa-cogs me-1"></i> Quản trị hệ thống
+                            </a>
+                    }
+
+                    @if (ViewBag.IsEmployee == true && ViewBag.IsAdmin != true)
+                    {
+                            <a class="btn btn-info btn-lg" href="@Url.Action("Index", "Orders", new { area = "Admin" })" role="button">
+                                <i class="fas fa-clipboard-list me-1"></i> Quản lý đơn hàng
+                            </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (ViewBag.IsAdmin == true)
+    {
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Quản lý hệ thống</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <a href="@Url.Action("Index", "Products", new { area = "Admin" })" class="btn btn-outline-primary w-100 py-3">
+                                        <i class="fas fa-box-open fs-3 d-block mb-2"></i>
+                                        Quản lý sản phẩm
+                                    </a>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <a href="@Url.Action("Index", "Categories", new { area = "Admin" })" class="btn btn-outline-primary w-100 py-3">
+                                        <i class="fas fa-tags fs-3 d-block mb-2"></i>
+                                        Quản lý danh mục
+                                    </a>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <a href="@Url.Action("Index", "Orders", new { area = "Admin" })" class="btn btn-outline-primary w-100 py-3">
+                                        <i class="fas fa-clipboard-list fs-3 d-block mb-2"></i>
+                                        Quản lý đơn hàng
+                                    </a>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <a href="@Url.Action("Index", "Users", new { area = "Admin" })" class="btn btn-outline-primary w-100 py-3">
+                                        <i class="fas fa-users fs-3 d-block mb-2"></i>
+                                        Quản lý người dùng
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    }
+
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h2 class="text-center mb-4">Sản phẩm nổi bật</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var product in Model)
+        {
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 shadow-sm product-card">
+                        <img src="@(string.IsNullOrEmpty(product.ImageUrl) ? "/images/products/default-product.jpg" : product.ImageUrl)" class="card-img-top" alt="@product.Name" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text text-muted">@product.Category.Name</p>
+                            <p class="card-text font-weight-bold text-purple">@product.Price.ToString("N0") đ</p>
+                            <a href="@Url.Action("Details", "Store", new { id = product.Id })" class="btn btn-outline-purple btn-sm">
+                                <i class="fas fa-eye me-1"></i> Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        }
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h2 class="text-center mb-4">Danh mục sản phẩm</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var category in ViewBag.Categories)
+        {
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-light product-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@category.Name</h5>
+                            <p class="card-text">@category.Description</p>
+                            <a href="@Url.Action("Index", "Store", new { categoryId = category.Id })" class="btn btn-purple">
+                                <i class="fas fa-arrow-right me-1"></i> Xem sản phẩm
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+        <script>
+            $(document).ready(function () {
+                // Hiệu ứng fade in cho các phần tử khi cuộn trang
+                $(window).scroll(function () {
+                    $('.product-card').each(function () {
+                        var bottom_of_object = $(this).offset().top + $(this).outerHeight();
+                        var bottom_of_window = $(window).scrollTop() + $(window).height();
+                        if (bottom_of_window > bottom_of_object) {
+                            $(this).animate({ 'opacity': '1' }, 500);
+                        }
+                    });
+                });
+
+                // Hiệu ứng hover cho sản phẩm
+                $('.product-card').hover(
+                    function () {
+                        $(this).addClass('shadow');
+                        $(this).css('transform', 'translateY(-5px)');
+                        $(this).css('transition', 'all 0.3s ease');
+                    },
+                    function () {
+                        $(this).removeClass('shadow');
+                        $(this).css('transform', 'translateY(0)');
+                    }
+                );
+            });
+        </script>
+}

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<NguyenNgocThien_Buoi4.Models.Category>
+@{
+    ViewData["Title"] = "Danh sách danh mục";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex align-items-center mb-3">
+        <a href="/" class="btn btn-sm rounded-pill">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="http://localhost:5259/Admin/Categories/Create" class="btn btn-primary rounded-pill">
+            <i class="fas fa-plus-circle me-2"></i> Thêm danh mục mới
+        </a>
+    </div>
+
+    <form method="get" asp-action="Index" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="searchString" class="form-control" placeholder="🔍 Tìm danh mục..." value="@Context.Request.Query["searchString"]" />
+            <button type="submit" class="btn btn-primary">Tìm</button>
+        </div>
+    </form>
+
+    @if (!Model.Any())
+    {
+            <div class="alert alert-warning">Không tìm thấy danh mục nào.</div>
+    }
+    else
+    {
+            <table class="table table-hover table-bordered shadow-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Tên danh mục</th>
+                        <th>Mô tả</th>
+                        <th class="text-center">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                                <td>@item.Description</td>
+                                <td class="text-center">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm rounded-pill me-1">
+                                        <i class="fas fa-edit"></i> Sửa
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm text-white rounded-pill me-1">
+                                        <i class="fas fa-info-circle"></i> Xem
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm rounded-pill">
+                                        <i class="fas fa-trash"></i> Xóa
+                                    </a>
+                                </td>
+                            </tr>
+                }
+                </tbody>
+            </table>
+    }
+</div>
